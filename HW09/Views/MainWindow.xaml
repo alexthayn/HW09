@@ -1,6 +1,7 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:HW09.ViewModels;assembly=HW09"
+        xmlns:models="clr-namespace:HW09.Models;assembly=HW09"
         Icon="resm:HW09.Assets.avalonia-logo.ico"
         Title="HW09"
         Width="550"
@@ -49,19 +50,32 @@
 
     <ListBox Grid.Row="2"
              Items="{Binding Contacts}"
-             SelectedItem="{Binding SelectedContact}"
+             
+             SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
              Margin="10">
-      
+      <ListBox.DataTemplates>
+        <DataTemplate DataType="models:Contact">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding FullName}"/>
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.DataTemplates>
+
     </ListBox>
 
     <StackPanel Grid.Row="2" Grid.Column ="1" Grid.ColumnSpan ="3"
                 Margin="20"
           DataContext="{Binding SelectedContact}">
-      <TextBlock Text="{Binding FullName}"
-               FontSize="24"
-               FontWeight="Bold"
-               HorizontalAlignment="Center"/>
-
+      <StackPanel Orientation="Horizontal"
+                  Margin="10">
+        <TextBlock Margin="0,0,10,0"
+                   Width="80"
+                   Text="Contact Name"/>
+        <TextBlock Text="{Binding FullName}"
+                 FontSize="24"
+                 FontWeight="Bold"
+                 HorizontalAlignment="Center"/>
+      </StackPanel>
       <StackPanel Orientation="Horizontal"
                   Margin="10">
         <TextBlock Margin="0,0,10,0"

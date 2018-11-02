@@ -45,7 +45,20 @@ namespace HW09.ViewModels
                 OnPropertyChanged(nameof(Contacts));
             }
         }
-        public Contact SelectedContact { get; set; }
+
+        private Contact _selectedContact;
+        public Contact SelectedContact
+        {
+            get
+            {
+                return _selectedContact;
+            }
+            set
+            {
+                _selectedContact = value;
+                OnPropertyChanged(nameof(SelectedContact));
+            }
+        }
 
         private string _vcfFilePath;
         public string VCFFilePath
