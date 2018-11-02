@@ -1,0 +1,35 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:ContactEditor.Converters"
+             xmlns:local="clr-namespace:ContactEditor.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+  <UserControl.Resources>
+    <Thickness x:Key="InfoMargin">0,10,0,0</Thickness>
+  </UserControl.Resources>
+  <StackPanel>
+    <TextBlock Text="{Binding FullName}"
+               FontSize="24"
+               FontWeight="Bold"
+               HorizontalAlignment="Center"/>
+
+    <StackPanel Orientation="Horizontal"
+                Margin="10">
+      <TextBlock Margin="0,0,10,0"
+                 Width="80"
+                 Text="Mobile Phone"/>
+      <TextBlock FontWeight="Bold"
+                 Text="{Binding MobilePhone}"/>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal"
+                Margin="10">
+      <TextBlock Margin="0,0,10,0"
+                 Width="80"
+                 Text="Email"/>
+      <TextBlock FontWeight="Bold"
+                 Text="{Binding Email}"/>
+    </StackPanel>
+  </StackPanel>
+</UserControl>

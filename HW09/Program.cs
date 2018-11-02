@@ -1,5 +1,4 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Logging.Serilog;
 using HW09.ViewModels;
 using HW09.Views;
@@ -10,7 +9,7 @@ namespace HW09
     {
         static void Main(string[] args)
         {
-            BuildAvaloniaApp().Start<MainWindow>(() => new MainWindowViewModel());
+            BuildAvaloniaApp().Start<MainWindow>();
         }
 
         public static AppBuilder BuildAvaloniaApp()
