@@ -49,18 +49,14 @@
             Command="{Binding LoadFile}"/>
 
     <ListBox Grid.Row="2"
-             Items="{Binding Contacts}"
-             
+             Items="{Binding Contacts}"             
              SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
              Margin="10">
       <ListBox.DataTemplates>
         <DataTemplate DataType="models:Contact">
-          <StackPanel Orientation="Horizontal">
             <TextBlock Text="{Binding FullName}"/>
-          </StackPanel>
         </DataTemplate>
       </ListBox.DataTemplates>
-
     </ListBox>
 
     <StackPanel Grid.Row="2" Grid.Column ="1" Grid.ColumnSpan ="3"

@@ -44,8 +44,8 @@ namespace HW09.Models
                 {
                     FirstName = contact.GivenName,
                     LastName = contact.FamilyName,
-                    MobilePhone = contact.PhoneNumbers.ToString(),
-                    Email = contact.EmailAddresses.ToString()
+                    MobilePhone = (contact.PhoneNumbers.Count > 1) ? contact.PhoneNumbers[0].Number.ToString() : "N/A",
+                    Email = (contact.EmailAddresses.Count > 1) ? contact.EmailAddresses[0].Email.ToString() : "N/A"
                 });                 
             }
             return ListOfContacts;
