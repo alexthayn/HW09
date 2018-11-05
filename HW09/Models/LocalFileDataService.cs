@@ -7,7 +7,6 @@ using vCardLib;
 using vCardLib.Deserializers;
 using vCardLib.Collections;
 
-
 namespace HW09.Models
 {
     public class GetContacts : IDataService

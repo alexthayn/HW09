@@ -1,4 +1,5 @@
-﻿using HW09.Models;
+﻿
+using HW09.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,5 +10,6 @@ namespace HW09.ViewModels
         Task<string> GetVCFFileAsync();
         bool FileExists(string path);
         List<Contact> GetContactsFromFile(string filePath);
+        //List<Contact> GetContactsFromGoogle(OAuth2Parameters credentials);
     }
 }

@@ -5,93 +5,131 @@
         Icon="resm:HW09.Assets.avalonia-logo.ico"
         Title="HW09"
         Width="550"
-        Height="400">
+        MinHeight="400">
 
   <Window.DataContext>
     <vm:MainWindowViewModel/>
   </Window.DataContext>
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="auto"/>
-      <ColumnDefinition Width="*"/>
-      <ColumnDefinition Width="auto"/>
-      <ColumnDefinition Width="auto"/>
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
-    <TextBlock Text="{Binding Title}" 
-               Grid.ColumnSpan="4"
-               Margin="15"
-               FontSize="32"
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center"/>
-
-    <TextBlock Grid.Row="1"
-               Margin ="5"
-               Text ="Select a .vcf file to import"
-               VerticalAlignment="Center"/>
-
-    <TextBox Grid.Row="1" Grid.Column="1"
-             MinWidth="200"
-             Text="{Binding VCFFilePath}"/>
-
-    <Button Grid.Column="2" Grid.Row ="1"
-            Margin ="5"
-            Content="Select File"
-            Command="{Binding OpenFile}"/>
-    
-    <Button Grid.Column="3" Grid.Row="1"
-            Content="Load Contacts"
-            Margin="5"
-            Command="{Binding LoadFile}"/>
-
-    <ListBox Grid.Row="2"
-             Items="{Binding Contacts}"             
-             SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
-             Margin="10">
-      <ListBox.DataTemplates>
-        <DataTemplate DataType="models:Contact">
-            <TextBlock Text="{Binding FullName}"/>
-        </DataTemplate>
-      </ListBox.DataTemplates>
-    </ListBox>
-
-    <StackPanel Grid.Row="2" Grid.Column ="1" Grid.ColumnSpan ="3"
-                Margin="20"
-          DataContext="{Binding SelectedContact}">
-      <StackPanel Orientation="Horizontal"
-                  Margin="10">
-        <TextBlock Margin="0,0,10,0"
-                   Width="80"
-                   Text="Contact Name"/>
-        <TextBlock Text="{Binding FullName}"
-                 FontSize="24"
-                 FontWeight="Bold"
-                 HorizontalAlignment="Center"/>
-      </StackPanel>
-      <StackPanel Orientation="Horizontal"
-                  Margin="10">
-        <TextBlock Margin="0,0,10,0"
-                   Width="80"
-                   Text="Mobile Phone"/>
-        <TextBlock FontWeight="Bold"
-                   Text="{Binding MobilePhone}"/>
-      </StackPanel>
-      <StackPanel Orientation="Horizontal"
-                  Margin="10">
-        <TextBlock Margin="0,0,10,0"
-                   Width="80"
-                   Text="Email"/>
-        <TextBlock FontWeight="Bold"
-                   Text="{Binding Email}"/>
-      </StackPanel>      
-    </StackPanel>
-    <!--<controls:ContactControl Grid.Row="2" Grid.Colum ="1" Grid.ColumnSpan ="3"
-                             DataContext="{Binding SelectedContact}"/>-->
-
-  </Grid>
   
+  <TabControl>
+    <TabItem Header ="Contacts File Reader"  
+             FontWeight="Bold">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="auto"/>
+          <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Title}" 
+                   Grid.ColumnSpan="4"
+                   Margin="15"
+                   FontSize="32"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Row="1"
+                   Margin ="5"
+                   Text ="Select a .vcf file to import"
+                   VerticalAlignment="Center"/>
+
+        <TextBox Grid.Row="1" Grid.Column="1"
+                 MinWidth="200"
+                 Text="{Binding VCFFilePath}"/>
+
+        <Button Grid.Column="2" Grid.Row ="1"
+                Margin ="5"
+                Content="Select File"
+                Command="{Binding OpenFile}"/>
+    
+        <Button Grid.Column="3" Grid.Row="1"
+                Content="Load Contacts"
+                Margin="5"
+                Command="{Binding LoadFile}"/>
+
+        <ListBox Grid.Row="2"
+                 Items="{Binding Contacts}"             
+                 SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
+                 Margin="10">
+          <ListBox.DataTemplates>
+            <DataTemplate DataType="models:Contact">
+                <TextBlock Text="{Binding FullName}"/>
+            </DataTemplate>
+          </ListBox.DataTemplates>
+        </ListBox>
+
+        <StackPanel Grid.Row="2" Grid.Column ="1" Grid.ColumnSpan ="3"
+                    Margin="20"
+              DataContext="{Binding SelectedContact}">
+          <StackPanel Orientation="Horizontal"
+                      Margin="10">
+            <TextBlock Margin="0,0,10,0"
+                       Width="80"
+                       Text="Contact Name"/>
+            <TextBlock Text="{Binding FullName}"
+                     FontSize="24"
+                     FontWeight="Bold"
+                     HorizontalAlignment="Center"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal"
+                      Margin="10">
+            <TextBlock Margin="0,0,10,0"
+                       Width="80"
+                       Text="Mobile Phone"/>
+            <TextBlock FontWeight="Bold"
+                       Text="{Binding MobilePhone}"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal"
+                      Margin="10">
+            <TextBlock Margin="0,0,10,0"
+                       Width="80"
+                       Text="Email"/>
+            <TextBlock FontWeight="Bold"
+                       Text="{Binding Email}"/>
+          </StackPanel>      
+        </StackPanel>
+
+      </Grid>
+    </TabItem>
+    <TabItem Header="Google Map API"
+             FontWeight="Bold">
+      <StackPanel>
+        <TextBlock Text="Google Directions"                   
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="10"
+                   FontSize="32"
+                   FontWeight="bold"/>
+
+        <StackPanel Orientation="horizontal"
+                    Margin="5">
+          <TextBlock Text="Enter Origin: "                     
+                     Width="150"
+                     VerticalAlignment="Center"/>
+          <TextBox Text="{Binding StartLocation}"
+                   MinWidth="350"/>
+        </StackPanel>
+
+        <StackPanel Orientation="horizontal"
+                    Margin="5">
+          <TextBlock Text="Enter Destination: "
+                     Width="150"
+                     VerticalAlignment="Center"/>
+          <TextBox Text="{Binding Destination}"
+                   MinWidth="350"/>          
+        </StackPanel>
+        <Button Content="Get Directions"
+                Margin="10"
+                Command="{Binding GetDirections}"/>
+
+        <TextBlock Text="{Binding TextDirections}"
+                    Margin ="10"/>
+      </StackPanel>
+    </TabItem>
+  </TabControl>
 </Window>

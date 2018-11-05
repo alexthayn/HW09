@@ -1,37 +1,65 @@
 ﻿using HW09.Commands;
 using HW09.Models;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace HW09.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        public MainWindowViewModel() : this(new GetContacts()) { }
+        public MainWindowViewModel() : this(new GetContacts(), new GoogleMapService()) { }
 
-        public MainWindowViewModel(IDataService data)
+        public MainWindowViewModel(IDataService data, IMapService mapService)
         {
             this.data = data;
+            this.mapService = mapService;
 
-            OpenFile = new FileCommand(
+            OpenFile = new MyCommand(
             true,
             async () =>
             {
                 VCFFilePath = await data.GetVCFFileAsync();
                 LoadFile.RaiseCanExecuteChanged();
             });
+
             OpenFile.RaiseCanExecuteChanged();
         }
 
         private readonly IDataService data;
+        private readonly IMapService mapService;
+        private string _startLocation;
+        public string StartLocation
+        {
+            get
+            {
+                return _startLocation;
+            }
+            set
+            {
+                _startLocation = value;
+                OnPropertyChanged(nameof(StartLocation));
+            }
+        }
+
+        private string _destination;
+        public string Destination
+        {
+            get
+            {
+                return _destination;
+            }
+            set
+            {
+                _destination = value;
+                OnPropertyChanged(nameof(Destination));
+            }
+        }
+
 
         public string Title => "Contacts Viewer";
 
-        public FileCommand OpenFile { get; set; }
+        public MyCommand OpenFile { get; set; }
         private List<Contact> _contacts;
         public List<Contact> Contacts
         {
@@ -43,8 +71,7 @@ namespace HW09.ViewModels
             {
                 _contacts = value;
                 OnPropertyChanged(nameof(Contacts));
-            }
-        }
+            }        }
 
         private Contact _selectedContact;
         public Contact SelectedContact
@@ -72,8 +99,8 @@ namespace HW09.ViewModels
             }
         }
 
-        private FileCommand _loadFile;
-        public FileCommand LoadFile => _loadFile ?? (_loadFile = new FileCommand(
+        private MyCommand _loadFile;
+        public MyCommand LoadFile => _loadFile ?? (_loadFile = new MyCommand(
             /*data.FileExists(VCFFilePath)*/true,
             async () =>
             {
@@ -81,6 +108,29 @@ namespace HW09.ViewModels
             }
             ));
 
+        private string _textDirections;
+        public string TextDirections
+        {
+            get => _textDirections;
+            set
+            {
+                _textDirections = value;
+                OnPropertyChanged(nameof(TextDirections));
+            }
+        }
+
+        private MyCommand _getDirections;
+        public MyCommand GetDirections => _getDirections ?? (_getDirections = new MyCommand(
+            true,
+            async () =>
+            {
+
+                if (StartLocation == null || Destination == null)
+                    TextDirections= "Please enter a valid origin/destination";
+                else
+                    TextDirections = mapService.GetDirections(StartLocation, Destination);
+            }
+            ));
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

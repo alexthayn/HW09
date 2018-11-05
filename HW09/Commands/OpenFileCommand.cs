@@ -3,17 +3,17 @@ using System.Windows.Input;
 
 namespace HW09.Commands
 {
-    public class FileCommand : ICommand
+    public class MyCommand : ICommand
     {
         private readonly bool canExecute;
         private readonly Action execute;
 
-        public FileCommand(Action execute)
+        public MyCommand(Action execute)
         {
             this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
         }
 
-        public FileCommand(bool canExecute, Action execute)
+        public MyCommand(bool canExecute, Action execute)
         {
             this.canExecute = canExecute;
             this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
